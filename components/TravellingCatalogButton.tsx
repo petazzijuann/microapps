@@ -18,10 +18,16 @@ export const CATALOG_SLOT_START_ID = "catalogo-slot-start";
 export const CATALOG_SLOT_END_ID = "catalogo-slot-end";
 
 /**
- * Hay un solo botón "Ver catálogo" en toda la landing. Arranca en el hero,
- * baja acompañando a la persona (se queda centrado en la pantalla mientras
- * recorre las secciones) y termina estacionado en el CTA final, de modo que
- * el "Pedí algo a tu medida" queda visible abajo.
+ * Distancia desde el borde inferior de la pantalla a la que viaja el botón.
+ * El `pb-8` del hero está pensado para que arranque justo a esta altura.
+ */
+const CATALOG_BUTTON_BOTTOM_GAP = 32;
+
+/**
+ * Hay un solo botón "Ver catálogo" en toda la landing. Arranca abajo en el
+ * hero, viaja pegado al borde inferior de la pantalla mientras la persona
+ * recorre las secciones, y termina estacionado en el CTA final, arriba del
+ * "¿No ves lo que necesitás?".
  */
 export default function TravellingCatalogButton() {
   const reduceMotion = useReducedMotion();
@@ -37,13 +43,15 @@ export default function TravellingCatalogButton() {
     const endSlot = document.getElementById(CATALOG_SLOT_END_ID);
     if (!startSlot || !endSlot) return;
 
-    const startTop = startSlot.getBoundingClientRect().top;
     const endTop = endSlot.getBoundingClientRect().top;
-    const centered = (window.innerHeight - startSlot.offsetHeight) / 2;
+    const travelTop =
+      window.innerHeight - startSlot.offsetHeight - CATALOG_BUTTON_BOTTOM_GAP;
 
-    // Mientras el hero está a la vista sigue su hueco; después se queda en el
-    // centro de la pantalla; y cuando aparece el hueco final, se engancha ahí.
-    const target = Math.min(Math.max(startTop, centered), endTop);
+    // Viaja pegado al borde inferior de la pantalla (ahí lo espera el hueco del
+    // hero, que reserva exactamente esa altura) hasta que sube el hueco final:
+    // desde ese momento se engancha ahí, arriba del "¿No ves lo que necesitás?",
+    // y se va con la página.
+    const target = Math.min(travelTop, endTop);
 
     top.set(target);
     if (!hasPositioned.current) {
