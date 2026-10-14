@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import DemoCard from "@/components/DemoCard";
-import RainbowButton from "@/components/RainbowButton";
+import GlowButton from "@/components/GlowButton";
 import { DEMOS } from "@/lib/demos";
 
 export const metadata: Metadata = {
@@ -31,9 +31,9 @@ export default function CatalogoPage() {
           Contanos qué necesitás y lo armamos a tu medida.
         </p>
         <div className="mt-6 flex justify-center">
-          <RainbowButton href="/personalizado" size="md">
+          <GlowButton href="/personalizado" size="md">
             Pedí algo a tu medida
-          </RainbowButton>
+          </GlowButton>
         </div>
       </div>
     </div>

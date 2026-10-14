@@ -1,6 +1,6 @@
-# Aurovux — Decisiones y plan
+# MicroApps — Decisiones y plan
 
-Web de Aurovux: servicio de microapps a medida para pymes/empresas. Español rioplatense (voseo), tono directo y cercano.
+Web de MicroApps: servicio de microapps a medida para pymes/empresas. Español rioplatense (voseo), tono directo y cercano.
 
 ## Stack y decisiones
 
@@ -9,7 +9,7 @@ Web de Aurovux: servicio de microapps a medida para pymes/empresas. Español rio
 - **Un solo repo.** Cada demo del catálogo vive en `app/demos/[slug]/page.tsx`, por ahora un placeholder único "Demo en construcción" que lee el slug.
 - **Supabase** (`@supabase/supabase-js`) solo del lado servidor, con **service role key**, para insertar en la tabla `solicitudes` desde el route handler. Nunca se expone la service role al cliente.
 - **Deploy en Vercel** (sin configuración especial más allá de las env vars).
-- **Oscuro por defecto**, acento arcoíris recurrente (conic-gradient animado) pero no saturado: se usa solo en los botones principales (hero, flotante, `/personalizado`) y como detalle en el favicon.
+- **Oscuro por defecto**, con un **aura neón** multicolor como acento: un conic-gradient desenfocado que gira detrás del botón (dos capas: estela difusa + brillo pegado al borde). Se usa solo en los botones principales (hero, flotante, catálogo, `/personalizado`) y como detalle en el favicon.
 - **Fuente**: Geist (ya viene con `next/font/google` desde el scaffold), se mantiene en vez de sumar Inter.
 - **Validación**: zod en el route handler de `/api/solicitud`, + honeypot anti-spam.
 - **Web Speech API** (`SpeechRecognition` / `webkitSpeechRecognition`) para dictado por voz en el textarea de `/personalizado`, con tipos ambientales propios (no vienen en lib.dom.d.ts) y fallback si el navegador no lo soporta.
@@ -37,7 +37,7 @@ lib/constants.ts                     # slogan, nombre, whatsapp number, site url
 lib/demos.ts                         # array tipado con las 9 demos (slug, título, desc, icono)
 lib/supabaseServer.ts                # cliente supabase con service role (server-only)
 
-components/RainbowButton.tsx         # botón con borde arcoíris animado (usado en hero/flotante/personalizado)
+components/GlowButton.tsx            # botón con aura neón animada (usado en hero/flotante/catálogo/personalizado)
 components/AnimatedSection.tsx       # wrapper whileInView fade+slide-up, respeta prefers-reduced-motion
 components/FloatingCatalogButton.tsx # botón flotante con scroll progress ring + spring
 components/SiteHeader.tsx            # header mínimo con logo + nav (Catálogo / Pedido a medida)
@@ -54,7 +54,7 @@ components/sections/OwnProjects.tsx
 components/sections/FinalCta.tsx
 
 app/layout.tsx                       # metadata SEO/OG es-AR, fuente, SiteHeader
-app/globals.css                      # tema oscuro, keyframes arcoíris, foco visible
+app/globals.css                      # tema oscuro, keyframes del aura neón, foco visible
 app/icon.tsx                         # favicon generado (ImageResponse)
 app/page.tsx                         # ensambla las secciones de la landing
 app/catalogo/page.tsx
@@ -66,5 +66,5 @@ app/api/solicitud/route.ts           # POST: zod + honeypot + supabase insert + 
 ## Pendiente de configurar (placeholders)
 
 - `NEXT_PUBLIC_WHATSAPP_NUMBER` — número real para los links `wa.me`.
-- Links de los 3 proyectos propios (n8n, Valmont, Aurovux institucional).
+- Links de los 3 proyectos propios (n8n, Valmont, MicroApps institucional).
 - Variables de Supabase y n8n en `.env.local` / Vercel.

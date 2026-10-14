@@ -38,24 +38,27 @@ body {
   border-radius: 4px;
 }
 
-@keyframes rainbow-spin {
+@keyframes aura-spin {
   to {
     transform: rotate(1turn);
   }
 }
 
-.rainbow-border {
+/* Aura neón: dos capas desenfocadas del mismo gradiente girando detrás del
+   botón. La capa ancha hace la estela difusa, la angosta el brillo pegado al
+   borde. El contenido va encima con fondo sólido. */
+.neon-aura {
   position: relative;
   isolation: isolate;
   border-radius: 9999px;
-  padding: 2px;
 }
 
-.rainbow-border::before {
+.neon-aura::before,
+.neon-aura::after {
   content: "";
   position: absolute;
-  inset: -40%;
   z-index: -1;
+  border-radius: inherit;
   background: conic-gradient(
     from 0deg,
     #ff3b30,
@@ -68,17 +71,34 @@ body {
     #ff2d55,
     #ff3b30
   );
-  animation: rainbow-spin 5s linear infinite;
-  border-radius: inherit;
+  animation: aura-spin 6s linear infinite;
 }
 
-.rainbow-border > * {
-  position: relative;
-  z-index: 0;
+.neon-aura::before {
+  inset: -10px;
+  filter: blur(18px);
+  opacity: 0.75;
+}
+
+.neon-aura::after {
+  inset: -2px;
+  filter: blur(5px);
+  opacity: 0.95;
+}
+
+.neon-aura:hover::before {
+  opacity: 1;
+  inset: -14px;
+}
+
+.neon-aura::before,
+.neon-aura::after {
+  transition: opacity 250ms ease, inset 250ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rainbow-border::before {
+  .neon-aura::before,
+  .neon-aura::after {
     animation: none;
   }
 }

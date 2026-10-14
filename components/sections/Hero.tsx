@@ -1,4 +1,4 @@
-import RainbowButton from "@/components/RainbowButton";
+import GlowButton from "@/components/GlowButton";
 import AnimatedSection from "@/components/AnimatedSection";
 import { HERO_SLOGAN, HERO_SUBTITLE } from "@/lib/constants";
 
@@ -10,9 +10,9 @@ export default function Hero() {
       </h1>
       <p className="max-w-2xl text-lg text-muted-foreground">{HERO_SUBTITLE}</p>
       <div className="mt-2">
-        <RainbowButton id="hero-catalogo-btn" href="/catalogo" size="lg">
+        <GlowButton id="hero-catalogo-btn" href="/catalogo" size="lg">
           Ver catálogo
-        </RainbowButton>
+        </GlowButton>
       </div>
     </AnimatedSection>
   );

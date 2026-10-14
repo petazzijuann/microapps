@@ -28,11 +28,11 @@ export default function Icon() {
             alignItems: "center",
             justifyContent: "center",
             color: "#f4f4f5",
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: 700,
           }}
         >
-          A
+          M
         </div>
       </div>
     ),

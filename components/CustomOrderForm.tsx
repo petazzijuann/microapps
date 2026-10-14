@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import RainbowButton from "@/components/RainbowButton";
+import GlowButton from "@/components/GlowButton";
 import MicrophoneButton from "@/components/MicrophoneButton";
 import { buildWhatsAppLink } from "@/lib/constants";
 
@@ -54,9 +54,9 @@ export default function CustomOrderForm({ initialMessage, demoOrigen }: CustomOr
         </p>
         {whatsappLink ? (
           <div className="mt-6 flex justify-center">
-            <RainbowButton href={whatsappLink} size="md">
+            <GlowButton href={whatsappLink} size="md">
               Escribime por WhatsApp
-            </RainbowButton>
+            </GlowButton>
           </div>
         ) : (
           <p className="mt-6 text-xs text-muted-foreground">
@@ -137,9 +137,9 @@ export default function CustomOrderForm({ initialMessage, demoOrigen }: CustomOr
 
       {status === "error" && <p className="text-sm text-red-400">{errorMessage}</p>}
 
-      <RainbowButton type="submit" size="lg" disabled={status === "submitting"}>
+      <GlowButton type="submit" size="lg" disabled={status === "submitting"}>
         {status === "submitting" ? "Enviando…" : "Enviar pedido"}
-      </RainbowButton>
+      </GlowButton>
     </form>
   );
 }
