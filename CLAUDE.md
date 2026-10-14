@@ -9,7 +9,8 @@ Web de MicroApps: servicio de microapps a medida para pymes/empresas. Español r
 - **Un solo repo.** Cada demo del catálogo vive en `app/demos/[slug]/page.tsx`, por ahora un placeholder único "Demo en construcción" que lee el slug.
 - **Supabase** (`@supabase/supabase-js`) solo del lado servidor, con **service role key**, para insertar en la tabla `solicitudes` desde el route handler. Nunca se expone la service role al cliente.
 - **Deploy en Vercel** (sin configuración especial más allá de las env vars).
-- **Oscuro por defecto**, con un **aura neón** multicolor como acento: un conic-gradient desenfocado que gira detrás del botón (dos capas: estela difusa + brillo pegado al borde). Se usa solo en los botones principales (hero, flotante, catálogo, `/personalizado`) y como detalle en el favicon.
+- **Oscuro por defecto**, con un **marco neón** como acento: una línea fina pegada al contorno del botón (`.neon-frame`, un `::before` con `border` + `box-shadow` dentro y fuera) cuyo color cicla con `hue-rotate`. No gira: es un marco fijo que cambia de color. Se usa solo en los botones principales (catálogo, `/personalizado`) y como detalle en el favicon.
+- **Un solo botón "Ver catálogo" en la landing.** `TravellingCatalogButton` es `fixed` y viaja: arranca en el hueco del hero, se queda centrado en pantalla mientras la persona recorre las secciones, y estaciona en el hueco del CTA final para dejar ver el "Pedí algo a tu medida". La posición sale de `min(max(startSlotTop, centroPantalla), endSlotTop)` y pasa por un `useSpring`. Los dos extremos son `CatalogButtonSlot`, divs invisibles que reservan el espacio en el layout.
 - **Fuente**: Geist (ya viene con `next/font/google` desde el scaffold), se mantiene en vez de sumar Inter.
 - **Validación**: zod en el route handler de `/api/solicitud`, + honeypot anti-spam.
 - **Web Speech API** (`SpeechRecognition` / `webkitSpeechRecognition`) para dictado por voz en el textarea de `/personalizado`, con tipos ambientales propios (no vienen en lib.dom.d.ts) y fallback si el navegador no lo soporta.
@@ -37,9 +38,9 @@ lib/constants.ts                     # slogan, nombre, whatsapp number, site url
 lib/demos.ts                         # array tipado con las 9 demos (slug, título, desc, icono)
 lib/supabaseServer.ts                # cliente supabase con service role (server-only)
 
-components/GlowButton.tsx            # botón con aura neón animada (usado en hero/flotante/catálogo/personalizado)
+components/GlowButton.tsx            # botón con marco neón animado (catálogo / personalizado)
 components/AnimatedSection.tsx       # wrapper whileInView fade+slide-up, respeta prefers-reduced-motion
-components/FloatingCatalogButton.tsx # botón flotante con scroll progress ring + spring
+components/TravellingCatalogButton.tsx # botón único que viaja del hero al CTA final (+ CatalogButtonSlot)
 components/SiteHeader.tsx            # header mínimo con logo + nav (Catálogo / Pedido a medida)
 components/MicrophoneButton.tsx      # botón de dictado (Web Speech API)
 components/CustomOrderForm.tsx       # formulario cliente de /personalizado
@@ -54,7 +55,7 @@ components/sections/OwnProjects.tsx
 components/sections/FinalCta.tsx
 
 app/layout.tsx                       # metadata SEO/OG es-AR, fuente, SiteHeader
-app/globals.css                      # tema oscuro, keyframes del aura neón, foco visible
+app/globals.css                      # tema oscuro, keyframes del marco neón, foco visible
 app/icon.tsx                         # favicon generado (ImageResponse)
 app/page.tsx                         # ensambla las secciones de la landing
 app/catalogo/page.tsx

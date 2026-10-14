@@ -1,4 +1,4 @@
-import FloatingCatalogButton from "@/components/FloatingCatalogButton";
+import TravellingCatalogButton from "@/components/TravellingCatalogButton";
 import Hero from "@/components/sections/Hero";
 import WhatIsMicroapp from "@/components/sections/WhatIsMicroapp";
 import HowItWorks from "@/components/sections/HowItWorks";
@@ -17,7 +17,7 @@ export default function Home() {
       <Pricing />
       <OwnProjects />
       <FinalCta />
-      <FloatingCatalogButton />
+      <TravellingCatalogButton />
     </>
   );
 }

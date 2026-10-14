@@ -1,5 +1,5 @@
-import GlowButton from "@/components/GlowButton";
 import AnimatedSection from "@/components/AnimatedSection";
+import { CatalogButtonSlot, CATALOG_SLOT_START_ID } from "@/components/TravellingCatalogButton";
 import { HERO_SLOGAN, HERO_SUBTITLE } from "@/lib/constants";
 
 export default function Hero() {
@@ -10,9 +10,7 @@ export default function Hero() {
       </h1>
       <p className="max-w-2xl text-lg text-muted-foreground">{HERO_SUBTITLE}</p>
       <div className="mt-2">
-        <GlowButton id="hero-catalogo-btn" href="/catalogo" size="lg">
-          Ver catálogo
-        </GlowButton>
+        <CatalogButtonSlot id={CATALOG_SLOT_START_ID} />
       </div>
     </AnimatedSection>
   );

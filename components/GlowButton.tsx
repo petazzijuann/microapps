@@ -42,14 +42,14 @@ export default function GlowButton(props: GlowButtonProps) {
 
   if (props.href) {
     return (
-      <Link id={id} href={props.href} aria-label={ariaLabel} className="neon-aura inline-block">
+      <Link id={id} href={props.href} aria-label={ariaLabel} className="neon-frame inline-block">
         <span className={innerClasses}>{children}</span>
       </Link>
     );
   }
 
   return (
-    <span id={id} className="neon-aura inline-block">
+    <span id={id} className="neon-frame inline-block">
       <button
         type={props.type ?? "button"}
         onClick={props.onClick}
