@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0b;
+  --foreground: #f4f4f5;
+  --muted-foreground: #a1a1aa;
+  --surface: #131316;
+  --surface-border: #232327;
+  --accent: #8b5cf6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-surface: var(--surface);
+  --color-surface-border: var(--surface-border);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@keyframes rainbow-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.rainbow-border {
+  position: relative;
+  isolation: isolate;
+  border-radius: 9999px;
+  padding: 2px;
+}
+
+.rainbow-border::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  background: conic-gradient(
+    from 0deg,
+    #ff3b30,
+    #ff9f0a,
+    #ffcc00,
+    #34c759,
+    #00c7be,
+    #0a84ff,
+    #5856d6,
+    #ff2d55,
+    #ff3b30
+  );
+  animation: rainbow-spin 5s linear infinite;
+  border-radius: inherit;
+}
+
+.rainbow-border > * {
+  position: relative;
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rainbow-border::before {
+    animation: none;
+  }
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
